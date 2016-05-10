@@ -1,0 +1,76 @@
+<!doctype html>
+<html ng-app="scoreboard">
+ <head>
+
+     <script src="angular.min.js"></script>
+     <script src="angular-route.js"></script>
+     <script src="angular-resource.js"></script>
+     <script src="handball.js"></script>
+
+     <script>
+
+
+	</script>
+	<style>
+		.container{
+			width:600px;
+			height:100px;
+			 border-style: solid;
+    			border-width: 2px;
+background-color: black;
+     font-size: 20px;
+      font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
+      font-weight: bold;	
+			}
+	.score{
+
+		text-align: center;
+	}
+
+.bot_sep{
+border-bottom-style: dotted; 
+margin-left:20px; 
+border-bottom-color:white;
+}
+
+
+	</style>
+  </head>
+<body>
+
+<div class="container main" ng-controller="statCtrl">
+    
+    <div class="row">
+        <div class="span8 offset2">
+            <table class="handball table-striped" style="color:white; margin-left:30px; ">
+                <thead>
+                <tr  style="color:yellow;" >
+                    <th style="width:250px;"></th>
+                    <th style="width:90px;">1st</th>
+		     <th style="width:90px;">2nd</th>
+			<th style="width:90px;">Total</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr  >
+                    	<td class="bot_sep" >{{msg.team1.name}}</td>
+                    	<td  class="score bot_sep">{{msg.team1.first}}</td>
+			<td  class="score bot_sep">{{msg.team1.second}}</td>
+                    	<td  class="score bot_sep">{{msg.team1.total}}</td>
+                </tr>
+                 <tr>
+                    	<td >{{msg.team2.name}}</td>
+                    	<td class="score">{{msg.team2.first}}</td>
+			<td class="score">{{msg.team2.second}}</td>
+                    	<td class="score">{{msg.team2.total}}</td>
+                </tr>
+               
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html> 

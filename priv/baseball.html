@@ -1,0 +1,231 @@
+<!doctype html>
+<html ng-app="scoreboard">
+<head>
+    <script src="angular.min.js"></script>
+    <script src="angular-route.js"></script>
+    <script src="angular-resource.js"></script>
+    <script>
+
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                    results = regex.exec(location.search);
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+
+        var id = getParameterByName('id')
+
+        // define the module we're working with
+        var app = angular.module('scoreboard', ['ngRoute']);
+
+
+        app.controller('statCtrl', ['$scope','$http', function($scope, $http) {
+            // the last received msg
+            // $scope.msg = {};
+
+            $scope.$on('$viewContentLoaded', function() {
+
+                alert("fred");
+                //$scope.someData = ["Hey", "I'm", "Alive"]
+               // $scope.otherData = localStorage.getItem('myBackup')
+
+            });
+
+            $scope.ready1 = function(){
+                $http.get('http://localhost:8282/state/' + id).
+                                 success(function(data, status, headers, config) {
+                                    // this callback will be called asynchronously
+                                    $scope.msg = data;
+
+                            $scope.msg.team1.runs = mytotal1;
+
+
+                            var mytotal2 = 0;
+                            for(var i=0, len=data.team2.score.length; i<len; i++){
+                                mytotal2 += parseInt(data.team2.score[i]);  //Iterate over your first array and then grab the second element add the values up
+                            }
+                            $scope.msg.team2.runs = mytotal2;
+
+
+                              }).
+                             error(function(data, status, headers, config) {
+                                // called asynchronously if an error occurs
+                            $scope.msg = {
+                                              "id":"",
+                                             "sport":"",
+                                            "team1":
+                                           {"name":"",
+                                                   "score": [ ]},
+                                              "team2":
+                                             {"name":"",
+                                                "score": [ ]},
+                                           "ball": "",
+                                          "strike":"",
+                                          "out":"",
+                                         "pitcher":"",
+                                        "batter":""
+                                   }
+                          });
+            }
+
+  //          $http.get('/someUrl').
+   //                 success(function(data, status, headers, config) {
+    //                    // this callback will be called asynchronously
+     //                   alert(data);
+      //              }).
+       //             error(function(data, status, headers, config) {
+        //                // called asynchronously if an error occurs
+         //               alert(data);
+          //          });
+
+ //
+            //  var source = new EventSource('/sse');
+            var source = new EventSource('http://localhost:8282/sse/'+id);
+            // handles the callback from the received event
+            var handleCallback = function (msg) {
+                $scope.$apply(function () {
+                    var rawtext = msg.data.trim();
+                    var text = JSON.parse(rawtext);
+                    if (text.id == id){
+                        $scope.msg = text;
+                        var mytotal1 = 0;
+                        for(var i=0, len=text.team1.score.length; i<len; i++){
+                            mytotal1 += parseInt(text.team1.score[i]);  //Iterate over your first array and then grab the second element add the values up
+                        }
+                        $scope.msg.team1.runs = mytotal1;
+
+
+                        var mytotal2 = 0;
+                        for(var i=0, len=text.team2.score.length; i<len; i++){
+                            mytotal2 += parseInt(text.team2.score[i]);  //Iterate over your first array and then grab the second element add the values up
+                        }
+                        $scope.msg.team2.runs = mytotal2;
+                    }
+                });
+            }
+
+            source.addEventListener('message', handleCallback, false);
+            $scope.ready1();
+        }]);
+
+
+    </script>
+    <style>
+        .container{
+            width:800px;
+            height:240px;
+            border-style: solid;
+            border-width: 2px;
+            background-color: black;
+            font-size: 20px;
+            font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
+            font-weight: bold;
+            padding-top: 20px;
+            padding-right: 30px;
+        }
+        .score{
+
+            text-align: center;
+        }
+
+        .bot_sep{
+
+            margin-left:20px;
+
+        }
+
+        .scorebox{
+            width:50px;
+            font-size: 25px;
+            color:white;
+        }
+
+        .batter{
+
+            color:yellow;
+            width:150px;
+        }
+        .batterHead{
+            text-align:right;
+            color:white;
+            width:150px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container main" ng-controller="statCtrl"  >
+    <div ng-view></div>
+    <div class="row">
+        <div class="span8 offset2">
+            <table class="handball table-striped" style="color:white; margin-left:30px; ">
+                <thead>
+                <tr  style="color:white;" >
+                    <th style="width:140px;"></th>
+                    <th class="scorebox">1</th>
+                    <th class="scorebox">2</th>
+                    <th class="scorebox">3</th>
+                    <th class="scorebox">4</th>
+                    <th class="scorebox">5</th>
+                    <th class="scorebox">6</th>
+                    <th class="scorebox">7</th>
+                    <th class="scorebox">8</th>
+                    <th class="scorebox">9</th>
+                    <th class="scorebox">RUNS</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr style="color:LimeGreen;">
+                    <td class="bot_sep" style="color:white;"  >{{msg.team1.name}}</td>
+                    <td  class="score bot_sep">{{msg.team1.score[0]}}</td>
+                    <td  class="score bot_sep">{{msg.team1.score[1]}}</td>
+                    <td  class="score bot_sep">{{msg.team1.score[2]}}</td>
+                    <td  class="score bot_sep">{{msg.team1.score[3]}}</td>
+                    <td  class="score bot_sep">{{msg.team1.score[4]}}</td>
+                    <td  class="score bot_sep">{{msg.team1.score[5]}}</td>
+                    <td  class="score bot_sep">{{msg.team1.score[6]}}</td>
+                    <td  class="score bot_sep">{{msg.team1.score[7]}}</td>
+                    <td  class="score bot_sep">{{msg.team1.score[8]}}</td>
+
+                    <td  class="score bot_sep">{{msg.team1.runs}}</td>
+                </tr>
+                <tr style="color:LimeGreen;">
+                    <td style="color:white;"  >{{msg.team2.name}}</td>
+                    <td  class="score bot_sep">{{msg.team2.score[0]}}</td>
+                    <td  class="score bot_sep">{{msg.team2.score[1]}}</td>
+                    <td  class="score bot_sep">{{msg.team2.score[2]}}</td>
+                    <td  class="score bot_sep">{{msg.team2.score[3]}}</td>
+                    <td  class="score bot_sep">{{msg.team2.score[4]}}</td>
+                    <td  class="score bot_sep">{{msg.team2.score[5]}}</td>
+                    <td  class="score bot_sep">{{msg.team2.score[6]}}</td>
+                    <td  class="score bot_sep">{{msg.team2.score[7]}}</td>
+                    <td  class="score bot_sep">{{msg.team2.score[8]}}</td>
+                    <td  class="score bot_sep">{{msg.team2.runs}}</td>
+                </tr>
+
+                <tr style="color:LimeGreen; height:80px;" >
+
+                    <td style="padding-top:20px; height:100px;" ></td>
+                    <td  class="scorebox" colspan="3">BALL<span class="score bot_sep" style="color:LimeGreen;">{{msg.ball}}</span> </td>
+                    <td  class="scorebox" colspan="3">STRIKE<span class="score bot_sep" style="color:LimeGreen;">{{msg.strike}}</span> </td>
+                    <td  class="scorebox" style="padding-left:20px;" colspan="4">OUT<span class="score bot_sep" style="color:LimeGreen; ">{{msg.out}}</span> </td>
+
+                </tr>
+                </tbody>
+            </table>
+
+            <table class="handball table-striped" style="color:white;  ">
+                <tr>
+                    <td  class="batterHead">Batter:</td>
+                    <td  class="batter">{{msg.batter}}</td>
+                    <td  class="batterHead">Pitcher:</td>
+                    <td  class="batter">{{msg.pitcher}}</td>
+                </tr>
+    </div>
+</div>
+
+
+</body>
+</html> 

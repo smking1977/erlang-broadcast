@@ -1,0 +1,138 @@
+<div class="container">
+    <div class="page-header">
+        <h1>Baseball</h1>
+    </div>
+
+    <div ng-controller="handballController">
+        <form novalidate class="simple-form">
+
+
+            <div class="row">
+                <div class="col-md-1"> ID <input class="form-control input-sm" type="number" ng-model="event.id" /></div>
+            </div>
+
+
+            </br>
+            <div class="panel panel-default">
+                <div class="panel-heading">Team One</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3"> Name <input class="form-control input-sm" type="text" ng-model="event.team1.name" /></div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1" style="text-align:center;">  1 </div>
+                        <div class="col-md-1" style="text-align:center;">  2 </div>
+                        <div class="col-md-1" style="text-align:center;">  3 </div>
+                        <div class="col-md-1" style="text-align:center;">  4 </div>
+                        <div class="col-md-1" style="text-align:center;">  5 </div>
+                        <div class="col-md-1" style="text-align:center;">  6 </div>
+                        <div class="col-md-1" style="text-align:center;">  7 </div>
+                        <div class="col-md-1" style="text-align:center;">  8 </div>
+                        <div class="col-md-1" style="text-align:center;">  9 </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-1">  <input class="form-control input-sm" type="number" ng-model="event.team1.score[0]" /></div>
+                        <div class="col-md-1"> <input class="form-control input-sm" type="number" ng-model="event.team1.score[1]" /> </div>
+                        <div class="col-md-1">  <input class="form-control input-sm" type="number" ng-model="event.team1.score[2]" /></div>
+                        <div class="col-md-1"> <input class="form-control input-sm" type="number" ng-model="event.team1.score[3]" /> </div>
+                        <div class="col-md-1">  <input class="form-control input-sm" type="number" ng-model="event.team1.score[4]" /></div>
+                        <div class="col-md-1"> <input class="form-control input-sm" type="number" ng-model="event.team1.score[5]" /> </div>
+                        <div class="col-md-1">  <input class="form-control input-sm" type="number" ng-model="event.team1.score[6]" /></div>
+                        <div class="col-md-1"> <input class="form-control input-sm" type="number" ng-model="event.team1.score[7]" /> </div>
+                        <div class="col-md-1"> <input class="form-control input-sm" type="number" ng-model="event.team1.score[8]" /> </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Team Two</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4"> Name <input class="form-control input-sm" type="text" ng-model="event.team2.name" /></div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-1" style="text-align:center;">  1 </div>
+                        <div class="col-md-1" style="text-align:center;">  2 </div>
+                        <div class="col-md-1" style="text-align:center;">  3 </div>
+                        <div class="col-md-1" style="text-align:center;">  4 </div>
+                        <div class="col-md-1" style="text-align:center;">  5 </div>
+                        <div class="col-md-1" style="text-align:center;">  6 </div>
+                        <div class="col-md-1" style="text-align:center;">  7 </div>
+                        <div class="col-md-1" style="text-align:center;">  8 </div>
+                        <div class="col-md-1" style="text-align:center;">  9 </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-1">  <input class="form-control input-sm" type="number" ng-model="event.team2.score[0]" /></div>
+                        <div class="col-md-1"> <input class="form-control input-sm" type="number" ng-model="event.team2.score[1]" /> </div>
+                        <div class="col-md-1">  <input class="form-control input-sm" type="number" ng-model="event.team2.score[2]" /></div>
+                        <div class="col-md-1"> <input class="form-control input-sm" type="number" ng-model="event.team2.score[3]" /> </div>
+                        <div class="col-md-1">  <input class="form-control input-sm" type="number" ng-model="event.team2.score[4]" /></div>
+                        <div class="col-md-1"> <input class="form-control input-sm" type="number" ng-model="event.team2.score[5]" /> </div>
+                        <div class="col-md-1">  <input class="form-control input-sm" type="number" ng-model="event.team2.score[6]" /></div>
+                        <div class="col-md-1"> <input class="form-control input-sm" type="number" ng-model="event.team2.score[7]" /> </div>
+                        <div class="col-md-1"> <input class="form-control input-sm" type="number" ng-model="event.team2.score[8]" /> </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Current Action</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4"> batter   <input class="form-control input-sm" type="text " ng-model="event.pitcher" /> </div>
+                        <div class="col-md-4"> pitcher  <input class="form-control input-sm" type="text " ng-model="event.batter" /> </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Counts </div>
+                <div class="panel-body">
+
+                    <div class="row">
+                        <div class="col-md-1"> Balls  <input class="form-control input-sm" type="text " ng-model="event.ball" /> </div>
+                        <div class="col-md-1"> Strikes  <input class="form-control input-sm" type="text " ng-model="event.strike" /> </div>
+                        <div class="col-md-1"> Outs  <input class="form-control input-sm" type="text " ng-model="event.out" /> </div>
+                    </div>
+                    </br>
+                    <div class="row">
+
+                        <div class="col-md-1"> Score  </div>
+                        <div class="col-md-1">
+                            {{event.team1.score[0] + event.team1.score[1] + event.team1.score[2]  + event.team1.score[3] + event.team1.score[4] + event.team1.score[5]  + event.team1.score[6] + event.team1.score[7] + event.team1.score[8]}}
+                            -
+                            {{event.team2.score[0] + event.team2.score[1] + event.team2.score[2]  + event.team2.score[3] + event.team2.score[4] + event.team2.score[5]  + event.team2.score[6] + event.team2.score[7] + event.team2.score[8]}}
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="btn-group" role="group" aria-label="...">
+                <button type="button" ng-click="submit(event)" class="btn btn-default">Send</button>
+                <button type="button" ng-click="load(event)" class="btn btn-default">Load</button>
+                <button type="button" ng-click="update(event)" class="btn btn-default">Debug</button>
+            </div>
+
+
+        </form>
+        <br/>
+        <span class="panel" >{{master | json}}</span>
+    </div>
+</div>
+
+</div>

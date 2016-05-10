@@ -1,0 +1,19 @@
+
+SSE - 
+
+curl localhost:8282/sse/101
+
+
+webpage 
+
+http://localhost:8282/sb/handball.html?id=101
+
+
+POST 
+
+http://localhost:8282/state/101
+
+{ "id": 101, "team1": { "name": "fred", "first": 1, "second": 1 }, "team2": { "name": "bob", "first": 2, "second": 1 } }
+
+
+

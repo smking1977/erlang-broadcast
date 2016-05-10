@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="page-header">
+        <h1>Handball</h1>
+    </div>
+
+    <div ng-controller="handballController">
+        <form novalidate class="simple-form">
+
+
+            <div class="row">
+                <div class="col-md-1"> ID <input class="form-control input-sm" type="number" ng-model="event.id" /></div>
+            </div>
+
+
+            </br>
+            <div class="panel panel-default">
+                <div class="panel-heading">Team One</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3"> Name <input class="form-control input-sm" type="text" ng-model="event.team1.name" /></div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-2"> Set 1 <input class="form-control input-sm" type="number" ng-model="event.team1.first" /></div>
+                        <div class="col-md-2"> Set 2 <input class="form-control input-sm" type="number" ng-model="event.team1.second" /> </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Team Two</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4"> Name <input class="form-control input-sm" type="text" ng-model="event.team2.name" /></div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-2"> Set 1 <input class="form-control input-sm" type="number" ng-model="event.team2.first" /></div>
+                        <div class="col-md-2"> Set 2 <input class="form-control input-sm" type="number" ng-model="event.team2.second" /> </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="btn-group" role="group" aria-label="...">
+                <button type="button" ng-click="submit(event)" class="btn btn-default">Send</button>
+                <button type="button" ng-click="load(event)" class="btn btn-default">Load</button>
+                <button type="button" ng-click="update(event)" class="btn btn-default">Debug</button>
+            </div>
+
+
+        </form>
+        <br/>
+        <span class="panel" >{{master | json}}</span>
+    </div>
+</div>
+
+</div>
